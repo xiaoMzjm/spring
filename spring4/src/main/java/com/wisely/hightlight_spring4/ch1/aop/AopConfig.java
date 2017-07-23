@@ -6,7 +6,17 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * pom需添加aspect依赖
- * @author 黑绝
+ * 
+ * 		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.8.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.8</version>
+		</dependency>
  *
  */
 @Configuration

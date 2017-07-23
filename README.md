@@ -27,7 +27,7 @@
 | ---------------------------------------- | ---------------------------------------- |
 | [@Bean](https://github.com/xiaoMzjm/spring/blob/master/spring4/src/main/java/com/wisely/hightlight_spring4/ch1/javaconfig/JavaConfig.java) | 在一个方法上配置@Bean，该方法返回的对象将会交给spring管理。该方法的方法名就是该bean的名称。 |
 
-### 1.4 el
+### 1.4 [el](https://github.com/xiaoMzjm/spring/tree/master/spring4/src/main/java/com/wisely/hightlight_spring4/ch2/el)
 
 使用el表达式，从配置文件读取配置，注入到bean的属性中。
 
@@ -55,7 +55,7 @@
 
 | 注解                                       | 含义                                       |
 | ---------------------------------------- | ---------------------------------------- |
-| [@Conditional(XXXCondition.class)](https://github.com/xiaoMzjm/spring/blob/master/spring4/src/main/java/com/wisely/hightlight_spring4/ch3/conditional/ConditionConfig.java) | XXXCondition.class这个类中的match方法返回true，则...。一般配置@Bean使用 |
+| [@Conditional(XXXCondition.class)](https://github.com/xiaoMzjm/spring/blob/master/spring4/src/main/java/com/wisely/hightlight_spring4/ch3/conditional/ConditionConfig.java) | XXXCondition.class这个类中的match方法返回true，则...。一般跟@Bean一起使用，但满足Condition时，才创建bean |
 
 
 
@@ -84,3 +84,46 @@
 | [@EnableScheduling](https://github.com/xiaoMzjm/spring/blob/master/spring4/src/main/java/com/wisely/hightlight_spring4/ch3/taskscheduler/TaskSchedulerConfig.java) | 开启计划任务。配置在配置类上。                     |
 | [@Scheduled(fixedRate=5000)](https://github.com/xiaoMzjm/spring/blob/master/spring4/src/main/java/com/wisely/hightlight_spring4/ch3/taskscheduler/ScheduledTaskService.java) | 配置在方法上，代表计划任务。fixedRate=5000标识每5秒执行 |
 | [@Scheduled(cron="10 54 0 ? * *")](https://github.com/xiaoMzjm/spring/blob/master/spring4/src/main/java/com/wisely/hightlight_spring4/ch3/taskscheduler/ScheduledTaskService.java) | 每月，每周，每天的0时54分10秒执行。                |
+
+
+
+# 二、spring  mvc
+
+## 2.1 [控制器](https://github.com/xiaoMzjm/spring/tree/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4)
+
+| 注解                                       | 含义                                       |
+| ---------------------------------------- | ---------------------------------------- |
+| [@Controller](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4/HelloController.java) | 注解在类上，表明这个类是spring mvc里的Controller。可以被http请求访问到。 |
+| [@RequestMapping(value="xxx")](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4/HelloController.java) | 用来映射web请求（访问路径和参数）、处理类和方法的。注解在类上，代表该类所有方法的访问的前缀URL。注解在方法上，代表该方法的访问地址。 |
+| @ResponseBody                            | 注解在类上，代表该类所有方法都直接放回数据（ajax）。注解在方法上，代表该方法直接返回数据（用户ajax）。 |
+| [@RequestMapping(produces = "text/plain;charset=UTF-8")](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4/domain/DemoAnnoController.java) | prodeces，申明返回数据的格式，一般配合@ResponseBody一起使用。 |
+| [@RequestMapping(value="/pathvar/{str}" , produces = "text/plain;charset=UTF-8")](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4/domain/DemoAnnoController.java) | value="/pathvar/{str}"，意思是URL中，/pathvar/后面的部分将会作为参数传入方法，参数名为str。 |
+| [method(@PathVariable String str)](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4/domain/DemoAnnoController.java) | @PathVaribale，注解方法的参数左边，结合上面的value注解，把URL上的东西注入到该属性中去。 |
+| method(Long id)                          | 访问路径：/xxx/xxx?id=1，那么id直接会注入到方法的入参中      |
+| method(MyDemo)                           | 访问路径：/xxx/xxx?id=1，假如MyDemo类中有一个字段叫id，那么会自动注入。 |
+| method(HttpServletRequest request)       | HttpServletRequest可以随时被注入                |
+| @RequestMapping(value= {"/name1" , "/name2"}) | value可以是个数组，这样多个地址都放进入到该                 |
+| @RestController                          | 注解在类上，相当于@Controller和@ResponseBody的结合。   |
+
+
+
+## 2.2 拦截器
+
+| 注解                                       | 含义                                       |
+| ---------------------------------------- | ---------------------------------------- |
+| [HandlerInterceptorAdapter](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4/interceptor/DemoInterceptor.java) | 继承该类，实现两个方法，分别在请求前和请求后进行拦截。1、实现类要@Bean交给spring管理。2、要手动添加实现类到拦截器链中。 |
+| [@ControllerAdvice](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4/advice/AdviceController.java) | 配置在类上，该类的配置适用于所有的@RequestMapping方法。例如设置全局的KV变量，在所有方法中可以获取；例如设置对URL中的参数进行过滤等等。 |
+|                                          |                                          |
+
+
+
+## 2.3 文件上传
+
+
+
+## 2.4 服务器推送
+
+
+
+# 三、springboot
+
