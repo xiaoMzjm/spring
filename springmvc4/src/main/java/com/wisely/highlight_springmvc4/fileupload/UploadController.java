@@ -16,7 +16,7 @@ public class UploadController {
 	@ResponseBody
 	public String toUpload(MultipartFile file) {
 		try {
-			System.out.println("½ÓÊÕÎÄ¼şÖĞ...");
+			System.out.println("æ¥æ”¶æ–‡ä»¶ä¸­...");
 			System.out.println(file.getOriginalFilename());
 			System.out.println(file.getSize());
 			FileUtils.writeByteArrayToFile(new File("D:/" + file.getOriginalFilename()), file.getBytes());

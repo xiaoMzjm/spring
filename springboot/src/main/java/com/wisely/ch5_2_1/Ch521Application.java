@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wisely.ch5_2_1.config.AuthorSettings;
-import com.wisely.spring_boot_starter_hello.HelloService;
+//import com.wisely.spring_boot_starter_hello.HelloService;
 
 @SpringBootApplication
 @Controller
@@ -25,7 +25,7 @@ public class Ch521Application {
 	private AuthorSettings authorSettings;
 	
 	@Autowired
-	private HelloService helloService;
+	//private HelloService helloService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Ch521Application.class, args);
@@ -66,7 +66,8 @@ public class Ch521Application {
 	@ResponseBody
 	public String index(){
 		System.out.println("come to /");
-		return "Hello Spring Boot , author.anem=" + authorSettings.getName() + " , author.age=" + authorSettings.getAge() + " , helloService="+helloService.sayHello();
+		//return "Hello Spring Boot , author.anem=" + authorSettings.getName() + " , author.age=" + authorSettings.getAge() + " , helloService="+helloService.sayHello();
+		return "Hello Spring Boot , author.anem=" + authorSettings.getName() + " , author.age=" + authorSettings.getAge() + " , helloService=";
 	}
 	
 	/**
