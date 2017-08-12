@@ -119,11 +119,89 @@
 
 ## 2.3 文件上传
 
+依赖三方包：
+
+```java
+		<!--  文件上传 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<!-- 非必须，可简化IO操作 -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.3</version>
+		</dependency>
+```
+
+配置上传大小，编码格式代码例子：[点我](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4/MyMvcConfig.java)
+
+接收文件代码例子：[点我](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4/fileupload/UploadController.java)
+
+
+
 
 
 ## 2.4 服务器推送
 
+[Controllor](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/java/com/wisely/highlight_springmvc4/push/SseController.java)
 
+[js](https://github.com/xiaoMzjm/spring/blob/master/springmvc4/src/main/webapp/views/sse.jsp)
 
 # 三、springboot
+
+### 3.1 手动创建springBoot项目需要的依赖
+
+[pom.xml](https://github.com/xiaoMzjm/spring/blob/master/springboot/spring_boot_min_need_pom.xml)
+
+
+
+### 3.2 关闭特定的自动配置类
+
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+
+
+
+### 3.3 定制Banner
+
+1. 修改src/main/resources下新建一个banner.txt，复制字符串进去(快速生成：http://patorjk.com/software/taag/)，项目启动时就会打印该字符串
+
+### 3.4 特殊场景下不得不使用xml配置
+
+@ImportResource({"classpath:some-context.xml","classpath:some-context2.xml"})
+
+
+
+### 3.5 简化版@Value——@ConfigurationProperties
+
+```java
+@ConfigurationProperties(prefix="book")
+public class Application{
+  private String name;
+  private String price;
+}
+```
+
+如上配置后application.properties文件以book开头的配置都会读进来。
+
+```x
+book.name = 亲热天堂
+book.price = 50
+```
+
+也可以指定一个配置文件：
+
+```java
+@ConfigurationProperties(prefix="book",locations={"classpath:config/author.propereties"})
+```
+
+
+
+### 3.6 profile配置
+
+
+
+
 
